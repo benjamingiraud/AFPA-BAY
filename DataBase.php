@@ -146,6 +146,14 @@ class DataBase {
     $dbFilms->bindParam(':email', $email);
 
     $dbFilms->execute();
+    if (headers_sent()) {
+       die("Error: headers already sent!");
+    }
+    else {
+       header("Location: index.php?afpabay", true);
+       return $info;
+       exit();
+    }
   }
   function signIn($login, $password) {
     $dataBase = DataBase::connect();
